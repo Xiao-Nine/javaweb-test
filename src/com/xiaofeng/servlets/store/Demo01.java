@@ -1,27 +1,22 @@
-package com.xiaofeng.servlets;
-
-import com.xiaofeng.dao.FruitDao;
-import com.xiaofeng.dao.Fruits;
-import com.xiaofeng.myssm.myspringmvc.ViewBaseServlet;
+package com.xiaofeng.servlets.store;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet(name = "IndexServlet", value = "/index")
-public class IndexServlet extends ViewBaseServlet {
+@WebServlet(name = "TestStore", value = "/demo01")
+public class Demo01 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        session.setAttribute("fruits", Fruits.getInstance().getFruitList());
-        super.processTemplate("index", req, resp);
+        doPost(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
+        req.getServletContext().setAttribute("attribute", "attribute in servletContext");
     }
 }

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add</title>
+    <style>
+        .container {
+            width: 80%;
+            height: 100%;
+            margin-left: 10%;
+            background-color: skyblue;
+        }
+        .fruit_list {
+
+        }
+        table {
+            width: 100%;
+            border: 1px solid black;
+            border-collapse: collapse;
+            font-family: "楷体";
+            font-weight: lighter;
+            color: gray;
+            text-align: center;
+        }
+        th {
+            color: black;
+        }
+        tr, th, td {
+            border: 1px solid black;
+        }
+        tr:hover {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="fruit_list">
+        <form th:action="@{/add.do}">
+            <table>
+                <tr>
+                    <th>名称: </th>
+                    <td><input type="text" name="name"></td>
+                </tr>
+                <tr>
+                    <th>单价: </th>
+                    <td><input type="text" name="price"></td>
+                </tr>
+                <tr>
+                    <th>数量: </th>
+                    <td><input type="text" name="count"></td>
+                </tr>
+                <tr>
+                    <th>操作: </th>
+                    <td><input type="submit" value="submit"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>

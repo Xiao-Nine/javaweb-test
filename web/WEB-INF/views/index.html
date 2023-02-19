@@ -2,8 +2,8 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>test</title>
-		<script type="text/javascript" src="demo.js"></script>
+		<title>Index</title>
+		<script type="text/javascript" src="/js/Fruit.js"></script>
 		<style>
 			.container {
 				width: 80%;
@@ -29,10 +29,14 @@
 			tr, th, td {
 				border: 1px solid black;
 			}
+			tr:hover {
+				background-color: green;
+			}
 		</style>
 	</head>
 	<body>
 		<div class="container">
+			<a th:href="@{/toAdd}">添加Fruit</a>
 			<div class="fruit_list">
 				<table>
 					<tr>
@@ -42,12 +46,19 @@
 						<th>小计</th>
 						<th>操作</th>
 					</tr>
-					<tr>
-						<td>香蕉</td>
-						<td>3</td>
-						<td>5</td>
-						<td>15</td>
-						<td>&nbsp;</td>
+					<tr th:if="${#lists.isEmpty(session.fruits)}">
+						<td colspan="4">对不起, 库存为空</td>
+					</tr>
+					<tr th:if="${not #lists.isEmpty(session.fruits)}" th:each="fruit : ${session.fruits}">
+						<td><a th:text="${fruit.name}" th:href="@{/toEdit(name=${fruit.name})}"></a></td>
+						<td th:text="${fruit.price}">3</td>
+						<td th:text="${fruit.count}">5</td>
+						<td th:text="${fruit.count * fruit.price}"></td>
+						<td>
+							<button type="button" th:onclick="deleteFruit([[${fruit.name}]])">
+								delete
+							</button>
+						</td>
 					</tr>
 				</table>
 			</div>

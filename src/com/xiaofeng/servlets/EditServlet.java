@@ -8,20 +8,21 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-
-@WebServlet(name = "IndexServlet", value = "/index")
-public class IndexServlet extends ViewBaseServlet {
+@WebServlet("/edit.do")
+public class EditServlet extends ViewBaseServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        session.setAttribute("fruits", Fruits.getInstance().getFruitList());
-        super.processTemplate("index", req, resp);
+        doPost(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
+        String name = req.getParameter("name");
+        double price = Double.parseDouble(req.getParameter("price"));
+        int count = Integer.parseInt(req.getParameter("count"));
+        Fruits.getInstance().updateFruitList(name, price, count);
+        req.getSession().setAttribute("fruits", Fruits.getInstance().getFruitList());
+        resp.sendRedirect("index");
     }
 }
