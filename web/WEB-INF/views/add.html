@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Add</title>
@@ -36,7 +36,7 @@
 <body>
 <div class="container">
     <div class="fruit_list">
-        <form th:action="@{/add.do}">
+        <form th:action="@{/fruit?operate=add.do}" method="post">
             <table>
                 <tr>
                     <th>名称: </th>

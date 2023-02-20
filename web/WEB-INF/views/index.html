@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
 		<title>Index</title>
@@ -36,7 +36,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<a th:href="@{/toAdd}">添加Fruit</a>
+			<a th:href="@{/fruit?operate=add}">添加Fruit</a>
 			<div class="fruit_list">
 				<table>
 					<tr>
@@ -62,10 +62,6 @@
 					</tr>
 				</table>
 			</div>
-			<form action="add" method="post">
-				<input type="text" name="name">
-				<input type="submit" value="submit">
-			</form>
 		</div>
 	</body>
 </html>
