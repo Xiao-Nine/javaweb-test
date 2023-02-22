@@ -4,45 +4,22 @@ import com.xiaofeng.dao.Fruits;
 import com.xiaofeng.myssm.myspringmvc.ViewBaseServlet;
 import com.xiaofeng.pojo.Fruit;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
-@WebServlet("/fruit")
-public class FruitServlet extends ViewBaseServlet {
-    @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String operate = req.getParameter("operate");
-        if (operate == null || "".equals(operate)) {
-            operate = "index";
-        }
-        switch (operate) {
-            case "index":
-                renderIndexPage(req, resp);
-                break;
-            case "add":
-                renderAddPage(req, resp);
-                break;
-            case "edit":
-                renderEditPage(req, resp);
-                break;
-            case "edit.do":
-                updateFruit(req, resp);
-                break;
-            case "delete.do":
-                deleteFruit(req, resp);
-                break;
-            case "add.do":
-                addFruit(req, resp);
-                break;
-            default:
-                throw new RuntimeException("operate is null");
-        }
+public class FruitController extends ViewBaseServlet {
+    private ServletContext servletContext;
+
+    public void setServletContext(ServletContext servletContext) throws ServletException {
+        this.servletContext = servletContext;
+        super.init(servletContext);
     }
-
     // add a Fruit Object to FruitList
     private void addFruit(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String name = new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8");

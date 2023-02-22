@@ -36,7 +36,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<a th:href="@{/fruit?operate=add}">添加Fruit</a>
+			<a th:href="@{/fruit.do(operate=renderAddPage)}">添加Fruit</a>
 			<div class="fruit_list">
 				<table>
 					<tr>
@@ -50,7 +50,7 @@
 						<td colspan="4">对不起, 库存为空</td>
 					</tr>
 					<tr th:if="${not #lists.isEmpty(session.fruits)}" th:each="fruit : ${session.fruits}">
-						<td><a th:text="${fruit.name}" th:href="@{/toEdit(name=${fruit.name})}"></a></td>
+						<td><a th:text="${fruit.name}" th:href="@{/fruit.do(operate=renderEditPage, name=${fruit.name})}"></a></td>
 						<td th:text="${fruit.price}">3</td>
 						<td th:text="${fruit.count}">5</td>
 						<td th:text="${fruit.count * fruit.price}"></td>
