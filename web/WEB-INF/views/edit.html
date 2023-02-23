@@ -36,7 +36,8 @@
 <body>
     <div class="container">
         <div class="fruit_list">
-            <form th:action="@{/fruit.do?operate=updateFruit}">
+            <form th:action="@{/fruit.do}" method="post">
+                <input type="hidden" name="operate" value="updateFruit">
                 <table th:object="${fruit}">
                     <tr>
                         <th>名称: </th>
@@ -52,7 +53,7 @@
                     </tr>
                     <tr>
                         <th>小计: </th>
-                        <td><input type="text" th:value="*{price * count}"></td>
+                        <td><input type="text" readonly="true" th:value="*{price * count}"></td>
                     </tr>
                     <tr>
                         <th>操作: </th>

@@ -5,7 +5,6 @@ import org.thymeleaf.context.WebContext;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,11 +15,12 @@ import java.io.IOException;
 public class ViewBaseServlet extends HttpServlet {
 
     private TemplateEngine templateEngine;
-    private ServletContext servletContext;
-    public void init(ServletContext servletContext) throws ServletException {
+
+    @Override
+    public void init() throws ServletException {
 
         // 1.获取ServletContext对象
-        this.servletContext = servletContext;
+        ServletContext servletContext = this.getServletContext();
 
         // 2.创建Thymeleaf解析器对象
         ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(servletContext);
@@ -61,7 +61,7 @@ public class ViewBaseServlet extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
 
         // 2.创建WebContext对象
-        WebContext webContext = new WebContext(req, resp, servletContext);
+        WebContext webContext = new WebContext(req, resp, getServletContext());
 
         // 3.处理模板数据
         templateEngine.process(templateName, webContext, resp.getWriter());

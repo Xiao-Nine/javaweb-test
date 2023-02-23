@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <beans>
-    <bean id="fruit" class="com.xiaofeng.servlets.FruitController"></bean>
+    <bean id="fruit" class="com.xiaofeng.controller.FruitController">
+        <property name="service" ref="fruitService"></property>
+    </bean>
+    <bean id="fruitService" class="com.xiaofeng.service.impl.FruitServiceImpl">
+    </bean>
 </beans>
